@@ -1,7 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        //test
-        System.out.println("Hello World!");
-        System.out.println("Update");
+        int n = 2;
+        System.out.println("The fib sequence of: " + n + " is: " + Fibonnaci.fibBruteForce(n));
     }
 }
