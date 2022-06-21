@@ -15,4 +15,11 @@ public class Fibonnaci {
         //the way fib works is that we know what the next number is if we add the two previous numbers. n-1 single previous, n-2 double previous
         return fibBruteForce(n - 1) + fibBruteForce(n-2);
     }
+
+    //Iterative Bottom-Up Approach
+    public static int fibOptimized(int n){
+
+
+        return 0;
+    }
 }

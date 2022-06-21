@@ -1,6 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        int n = 2;
+        int n = 20;
         System.out.println("The fib sequence of: " + n + " is: " + Fibonnaci.fibBruteForce(n));
+
+        int[] arr1 = {2,3,2,3,4,4,5,5,1};
+        System.out.println("Single number: " + SingleNumber.singleNumberOptimized(arr1));
     }
 }
