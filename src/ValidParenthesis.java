@@ -10,11 +10,6 @@ public class ValidParenthesis {
         //Review:
         //Evaluate:
 
-        HashMap<Character, Character> myMap = new HashMap<>();
-        myMap.put(')', '(');
-        myMap.put(']', '[');
-        myMap.put('}', '{');
-
         Stack<Character> myStack = new Stack<Character>();
 
         //s = "()", s = "()[]{}"
@@ -55,6 +50,6 @@ public class ValidParenthesis {
             }
         }
 
-        return true;
+        return myStack.empty();
     }
 }
