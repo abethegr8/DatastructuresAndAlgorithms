@@ -52,4 +52,32 @@ public class ValidParenthesis {
 
         return myStack.empty();
     }
+
+    //s = "()", s = "()[]{}"
+    public static boolean areParenthesisBalanced(String s){
+        HashMap<Character, Character> closingToOpenParenthesisMap = new HashMap<>();
+        Stack<Character> stackOfOpenParenthesis = new Stack<>();
+
+        closingToOpenParenthesisMap.put(')', '(');
+        closingToOpenParenthesisMap.put('}', '{');
+        closingToOpenParenthesisMap.put(']', '[');
+
+        for(int i = 0; i < s.length(); i++){
+            Character c = s.charAt(i);
+            //if at anytime we see that its a closed parethesis, we need to pop the stack to see if the last element was an open parenth
+            if(closingToOpenParenthesisMap.containsKey(c)){
+                if(!stackOfOpenParenthesis.isEmpty() && closingToOpenParenthesisMap.get(c) == stackOfOpenParenthesis.peek()){
+                    stackOfOpenParenthesis.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                //we get here if its a OPEN Parenthesis, so lets continue to push it into the stack
+                stackOfOpenParenthesis.push(c);
+            }
+        }
+        return stackOfOpenParenthesis.isEmpty();
+    }
 }
