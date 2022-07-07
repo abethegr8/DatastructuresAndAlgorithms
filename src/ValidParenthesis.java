@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 public class ValidParenthesis {
@@ -51,5 +52,29 @@ public class ValidParenthesis {
         }
 
         return myStack.empty();
+    }
+
+    //s = "()", s = "()[]{}"
+    public static boolean areParenthesisBalanced(String s){
+        final Map<Character, Character> closingToOpenParenthesisMap = Map.ofEntries(Map.entry(')', '('), Map.entry('}', '{'), Map.entry(']', '['));
+        Stack<Character> stackOfOpenParenthesis = new Stack<>();
+
+        for(int i = 0; i < s.length(); i++){
+            Character c = s.charAt(i);
+            // If at anytime we see that it's a closed parenthesis, we need to pop the stack to see if the last element was an open parenthesis
+            if(closingToOpenParenthesisMap.containsKey(c)){
+                if(!stackOfOpenParenthesis.isEmpty() && closingToOpenParenthesisMap.get(c) == stackOfOpenParenthesis.peek()){
+                    stackOfOpenParenthesis.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                // We get here if its a OPEN Parenthesis, so lets continue to push it into the stack
+                stackOfOpenParenthesis.push(c);
+            }
+        }
+        return stackOfOpenParenthesis.isEmpty();
     }
 }
