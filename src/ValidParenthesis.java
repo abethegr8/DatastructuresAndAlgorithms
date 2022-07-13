@@ -77,4 +77,28 @@ public class ValidParenthesis {
         }
         return stackOfOpenParenthesis.isEmpty();
     }
+
+    // Hackerrank version, Be sure to add a Character to check the top element
+    public static boolean isValid(String s){
+        HashMap<Character, Character> mappings = new HashMap<>();
+        mappings.put(')', '(');
+        mappings.put(']', '[');
+        mappings.put('}', '{');
+
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            Character c = s.charAt(i);
+            if(mappings.containsKey(c)){
+                Character topElement = stack.isEmpty() ? '#' : stack.pop();
+                if(topElement != mappings.get(c)){
+                    return false;
+                }
+            }
+            else{
+                stack.push(c);
+            }
+        }
+        return stack.isEmpty();
+    }
 }
