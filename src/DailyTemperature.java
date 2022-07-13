@@ -67,19 +67,18 @@ import java.util.Stack;
 
 public class DailyTemperature {
     public static int[] dailyTemperature(int[] temperature){
-        int N = temperature.length;
-        int[] daysForTemperatureChange = new int[N];        // We will return this array. Will hold the amount of days we have to wait for it to be warmer
-        Stack<Integer> indexOfEachTemperatureArrayElement = new Stack<>();      // Monotonic Stack, keeps the index of the temperature of that day
+        int temperatureSize = temperature.length;
+        int[] daysForTemperatureChange = new int[temperatureSize];        // We will return this array. Will hold the amount of days we have to wait for it to be warmer
+        Stack<Integer> indexesOfHighTemperatureDays = new Stack<>();      // Monotonic Stack, keeps the index of the temperature of that day
 
-        for (int i = 0; i < N; i++) {
-            // Go into the while loop if stack is not empty and the temperature tomorrow is warmer than today
-            while(!indexOfEachTemperatureArrayElement.isEmpty() && temperature[indexOfEachTemperatureArrayElement.peek()] < temperature[i]){
+        for (int i = 0; i < temperatureSize; i++) {
+            while(!indexesOfHighTemperatureDays.isEmpty() && temperature[indexesOfHighTemperatureDays.peek()] < temperature[i]){
                 // We add the days it takes to get warmer into the returning array. Simple math take the day we are at minus the day we are comparing
-                daysForTemperatureChange[indexOfEachTemperatureArrayElement.peek()] = i - indexOfEachTemperatureArrayElement.peek();
-                indexOfEachTemperatureArrayElement.pop();  //lets pop from the stack since we are done with that day.
+                daysForTemperatureChange[indexesOfHighTemperatureDays.peek()] = i - indexesOfHighTemperatureDays.peek();
+                indexesOfHighTemperatureDays.pop();  //lets pop from the stack since we are done with that day.
             }
             // We keep pushing the day that is used as i into the stack. We only get here if the stack is empty and if the temperature is not warmer the next day
-            indexOfEachTemperatureArrayElement.push(i);
+            indexesOfHighTemperatureDays.push(i);
         }
         return daysForTemperatureChange;
     }
