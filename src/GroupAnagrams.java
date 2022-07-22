@@ -11,11 +11,6 @@ Example 3:
 Input: strs = ["a"]
 Output: [["a"]]
 
-Constraints:
-1 <= strs.length <= 104
-0 <= strs[i].length <= 100
-strs[i] consists of lowercase English letters.
-
 Understand:
 What kind of array will we have? String[] array
 What kind of elements will we working with? only a-z characters.
@@ -67,23 +62,29 @@ public class GroupAnagrams {
 
     //Time: O(nlogn) Space:O(n)
     public static List<List<String>> groupAnagrams(String[] words){
-        // Edge case if the String Array is empty;
-        if(words.length == 0){
+
+        if (words.length == 0) {
             return new ArrayList<>();
         }
+
         HashMap<String, List> strAnagrams = new HashMap<>();
 
         for (String str : words) {
-            char[] strToChar = str.toCharArray();
-            Arrays.sort(strToChar);
-            String anagramKey = String.valueOf(strToChar);
-            if(!strAnagrams.containsKey(anagramKey)){
+            String anagramKey = sortAnagramKey(str);
+            if (!strAnagrams.containsKey(anagramKey)) {
                 strAnagrams.put(anagramKey, new ArrayList());
             }
             strAnagrams.get(anagramKey).add(str);
         }
 
         return new ArrayList<>(strAnagrams.values());
+    }
+
+    public static String sortAnagramKey(String s){
+        char[] strToChar = s.toCharArray();
+        Arrays.sort(strToChar);
+        String anagramKey = String.valueOf(strToChar);
+        return anagramKey;
     }
 
 }
